@@ -9,6 +9,7 @@ extern crate multipart;
 
 mod guards;
 mod logger;
+mod utils;
 
 use guards::DataImages;
 
@@ -28,7 +29,7 @@ fn not_found(request: &Request) -> String {
 
 pub fn rocket() -> Rocket {
     rocket::ignite()
-        .mount("/", routes![index])
+        .mount("/", routes![upload_image_handler])
         .register(catchers![not_found])
 }
 
@@ -42,8 +43,8 @@ impl Server {
 
 #[post("/api/v1/images/upload", data = "<data>")]
 fn upload_image_handler<'a>(data: Result<DataImages, String>) -> Result<&'a str, Response<'static>> {
-    let path = env::temp_dir().join("uploaded_files");
-    let thum_path = env::temp_dir().join("uploaded_files/thumbnails");
+    let path = env::temp_dir().join("rust_test_task");
+    let thum_path = env::temp_dir().join("rust_test_task/thumbnails");
 
     let d = match data {
         Ok(f) => f,
