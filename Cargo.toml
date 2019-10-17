@@ -1,0 +1,17 @@
+[package]
+name = "rust_test_task"
+version = "0.1.0"
+authors = ["Code7unner <cherbadzhimaxim@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rocket = "0.4.2"
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
+curl = "0.4.25"
+
+[dependencies.rocket_contrib]
+version = "0.4.2"
+default-features = false
+features = ["json"]
