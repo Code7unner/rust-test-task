@@ -3,15 +3,22 @@ name = "rust_test_task"
 version = "0.1.0"
 authors = ["Code7unner <cherbadzhimaxim@gmail.com>"]
 edition = "2018"
+license = "MIT"
+readme = "README.md"
+description = "Server for upload images"
+
+keywords = ["server", "api", "images"]
+categories = ["web"]
 
 [dependencies]
+multipart = "0.16.1"
 rocket = "0.4.2"
-serde = "1.0"
+chrono = "0.4"
+base64 = "0.10.1"
+flexi_logger = "0.14.4"
+log = "0.4.8"
+reqwest = "0.9.22"
 serde_json = "1.0"
-serde_derive = "1.0"
-curl = "0.4.25"
-
-[dependencies.rocket_contrib]
-version = "0.4.2"
-default-features = false
-features = ["json"]
+image = "0.22.3"
+serde = { version = "1.0", features = ["derive"] }
+uuid = { version = "0.7", features = ["v4"] }
