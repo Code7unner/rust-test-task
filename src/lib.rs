@@ -42,19 +42,19 @@ impl Server {
 }
 
 #[post("/api/v1/images/upload", data = "<data>")]
-fn upload_image_handler<'a>(data: Result<DataImages, String>) -> Result<&'a str, Response<'static>> {
+fn upload_image_handler<'a>(
+    data: Result<DataImages, String>,
+) -> Result<&'a str, Response<'static>> {
     let path = env::temp_dir().join("rust_test_task");
     let thum_path = env::temp_dir().join("rust_test_task/thumbnails");
 
     let d = match data {
         Ok(f) => f,
         Err(err) => {
-            return Err(
-                Response::build()
-                    .status(Status::raw(400))
-                    .sized_body(Cursor::new(err))
-                    .ok()?,
-            )
+            return Err(Response::build()
+                .status(Status::raw(400))
+                .sized_body(Cursor::new(err))
+                .ok()?)
         }
     };
 
@@ -71,12 +71,10 @@ fn upload_image_handler<'a>(data: Result<DataImages, String>) -> Result<&'a str,
             Err(err) => {
                 error!("Error: {:?}", err);
 
-                return Err(
-                    Response::build()
-                        .status(Status::raw(400))
-                        .sized_body(Cursor::new(err.to_string()))
-                        .ok()?,
-                );
+                return Err(Response::build()
+                    .status(Status::raw(400))
+                    .sized_body(Cursor::new(err.to_string()))
+                    .ok()?);
             }
         };
 
